@@ -10,13 +10,16 @@ import com.dvpartners.salesanalytics.calculation.Calculation;
 @lombok.Setter
 public class ThisTimeLastYearCalculation<T> {
 	private String calculationType;
+	private String unit;
 	private T tier1;
 	private T tier2;
 	private T tier3;
 	private T tier4;
+	private T total;
 	
-	public ThisTimeLastYearCalculation(Calculation<T> calculation, List<ProductSalesDetails> listProductSalesDetails, Map<String, Double> mapPriceSensitivity) {
+	public ThisTimeLastYearCalculation(Calculation<T> calculation, List<ProductSalesDetails> listProductSalesDetails, Map<String, Double> mapPriceSensitivity, Map<String,ProductSip> mapProductSip) {
 		this.calculationType = calculation.getCalculationType();
+		this.unit = calculation.getUnit();
 		List<ProductSalesDetails> listTier1 = new ArrayList<>();
 		List<ProductSalesDetails> listTier2 = new ArrayList<>();
 		List<ProductSalesDetails> listTier3 = new ArrayList<>();
@@ -25,7 +28,10 @@ public class ThisTimeLastYearCalculation<T> {
 		for(ProductSalesDetails productSalesDetails : listProductSalesDetails) {
 			String productCode = productSalesDetails.getProductCode();
 			Double sensitivity = mapPriceSensitivity.get(productCode);
-			if(sensitivity != null && sensitivity <= -1) {
+			if(mapProductSip.containsKey(productCode)) {
+				listTier1.add(productSalesDetails);
+			}
+			else if(sensitivity != null && sensitivity <= -1) {
 				listTier2.add(productSalesDetails);
 			}
 			else if(sensitivity != null) {
@@ -40,5 +46,8 @@ public class ThisTimeLastYearCalculation<T> {
 		this.tier2 = calculation.calculate(listTier2);
 		this.tier3 = calculation.calculate(listTier3);
 		this.tier4 = calculation.calculate(listTier4);
+		this.total = calculation.calcSum(this.tier1, this.tier2, this.tier3, this.tier4);
+		
 	}
+	
 }

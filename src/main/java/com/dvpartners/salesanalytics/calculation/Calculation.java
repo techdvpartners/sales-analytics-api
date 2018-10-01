@@ -8,5 +8,6 @@ public interface Calculation<T> {
 
 	T calculate(List<ProductSalesDetails> list);
 	String getCalculationType();
-
+	String getUnit();
+	T calcSum(T tier1, T tier2, T tier3, T tier4);
 }

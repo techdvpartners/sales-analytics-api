@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 import com.dvpartners.salesanalytics.service.AppUserDetailsService;
 
@@ -26,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    .antMatchers("*").hasAnyRole("ADMIN","USER")
 		    .and().httpBasic().realmName("SALES ANALYTICS REALM")
 		    .authenticationEntryPoint(appAuthenticationEntryPoint);
+		
 	} 
     @Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

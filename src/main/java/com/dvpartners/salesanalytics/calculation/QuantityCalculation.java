@@ -16,4 +16,18 @@ public class QuantityCalculation implements Calculation<Integer> {
 		return "Quantity";
 	}
 
+	@Override
+	public Integer calcSum(Integer tier1, Integer tier2, Integer tier3, Integer tier4) {
+		// TODO Auto-generated method stub
+		return tier1+tier2+tier3+tier4;
+	}
+
+	@Override
+	public String getUnit() {
+		// TODO Auto-generated method stub
+		return "count";
+	}
+
+	
+
 }
