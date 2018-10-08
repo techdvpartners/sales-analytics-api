@@ -33,14 +33,24 @@ public class ProductSalesDetailsService {
 		StringBuilder filterParam = new StringBuilder("select * product_sales_details as psd ON rfd.product_code = psd.product_code");
 		boolean and = false;
 		
+		List<String> supcat = salesFilter.getSuperCategory();
 		List<String> cat = salesFilter.getCategory();
 		List<String> grp = salesFilter.getGroup();
 		List<String> subgrp = salesFilter.getSubGroup();
 		
-		if(!ObjectUtils.isEmpty(cat) || !ObjectUtils.isEmpty(grp) || !ObjectUtils.isEmpty(subgrp)) {
+		if(!ObjectUtils.isEmpty(supcat) || !ObjectUtils.isEmpty(cat) || !ObjectUtils.isEmpty(grp) || !ObjectUtils.isEmpty(subgrp)) {
 			filterParam = filterParam.append(" WHERE ");
 		}
-			
+			if(!ObjectUtils.isEmpty(supcat)) {
+				if(and) filterParam.append(" AND ");
+				filterParam.append(" rfd.super_category IN(");
+				for (String supcategory : supcat) {
+					filterParam.append("'"+supcategory+"'"+',');
+				}
+				filterParam.deleteCharAt(filterParam.length()-1);
+				filterParam.append(") ");
+				and = true;
+			}
 			if(!ObjectUtils.isEmpty(cat)) {
 				if(and) filterParam.append(" AND ");
 				filterParam.append(" rfd.category IN(");

@@ -22,6 +22,10 @@ public class FilterController {
 	@Autowired
 	private FilterService filterService;
 	
+	@GetMapping("/supercategory/distinct")
+	public List<String> getDistinctSuperCategory(){
+		return filterService.getDistinctSuperCategory();
+	}
 	@GetMapping("/category/distinct")
 	public List<String> getDistinctCategory(){
 		return filterService.getDistinctCategory();
@@ -34,7 +38,10 @@ public class FilterController {
 	public List<String> getDistinctSubgroup(){
 		return filterService.getDistinctSubgroup();
 	}
-	
+	@PostMapping("/supercategory/filtered")
+	public FilterCategoryModel getFilteredSuperCategory(@RequestBody SalesFilter salesFilter){
+		return filterService.getFilteredSuperCategory(salesFilter);
+	}
 	@PostMapping("/category/filtered")
 	public FilterCategoryModel getFilteredCategory(@RequestBody SalesFilter salesFilter){
 		return filterService.getFilteredCategory(salesFilter);

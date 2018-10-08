@@ -12,7 +12,7 @@ public class MarginPercentageCalculation implements Calculation<BigDecimal> {
 		if(list.size()==0 || list.isEmpty())return new BigDecimal(0);
 		MarginCalculation marginCalculation = new MarginCalculation();
 		RevenueCalculation revenueCalculation = new RevenueCalculation();
-		BigDecimal marginPercentage = marginCalculation.calculate(list).divide(revenueCalculation.calculate(list),3,RoundingMode.FLOOR);
+		BigDecimal marginPercentage = new BigDecimal(marginCalculation.calculate(list)).divide(new BigDecimal(revenueCalculation.calculate(list)),3, RoundingMode.FLOOR);
 		return marginPercentage;
 	}
 
@@ -24,7 +24,7 @@ public class MarginPercentageCalculation implements Calculation<BigDecimal> {
 	@Override
 	public BigDecimal calcSum(BigDecimal tier1, BigDecimal tier2, BigDecimal tier3, BigDecimal tier4) { 
 		// TODO Auto-generated method stub
-		return (tier1.add(tier2).add(tier3).add(tier4)).divide(new BigDecimal(4));
+		return tier1.add(tier2).add(tier3).add(tier4).divide(new BigDecimal(4));
 	}
 
 	@Override

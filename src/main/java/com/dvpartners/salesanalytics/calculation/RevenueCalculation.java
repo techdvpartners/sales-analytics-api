@@ -5,15 +5,15 @@ import java.util.List;
 
 import com.dvpartners.salesanalytics.model.ProductSalesDetails;
 
-public class RevenueCalculation implements Calculation<BigDecimal> {
+public class RevenueCalculation implements Calculation<Integer> {
 	@Override
-	public BigDecimal calculate(List<ProductSalesDetails> list) {
+	public Integer calculate(List<ProductSalesDetails> list) {
 		BigDecimal total = new BigDecimal(0.0);
 		for(ProductSalesDetails productSalesDetails : list) {
 			BigDecimal value = productSalesDetails.getSalesNetExclusiveVat();
 			total = total.add(value);
 		}
-		return total;
+		return total.intValue();
 	}
 
 	@Override
@@ -22,9 +22,9 @@ public class RevenueCalculation implements Calculation<BigDecimal> {
 	}
 
 	@Override
-	public BigDecimal calcSum(BigDecimal tier1, BigDecimal tier2, BigDecimal tier3, BigDecimal tier4) {
+	public Integer calcSum(Integer tier1, Integer tier2, Integer tier3, Integer tier4) {
 		// TODO Auto-generated method stub
-		return tier1.add(tier2).add(tier3).add(tier4);
+		return (tier1 + tier2 + tier3 +tier4);
 	}
 
 	@Override

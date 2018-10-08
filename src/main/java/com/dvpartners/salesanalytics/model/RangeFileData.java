@@ -11,6 +11,7 @@ public class RangeFileData {
 	Integer Id;
 	String productCode;
 	String publicationName;
+	String superCategory;
 	String category;
 	String grp;
 	String subgroup;

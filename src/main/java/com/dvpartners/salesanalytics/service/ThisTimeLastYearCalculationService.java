@@ -54,10 +54,10 @@ public class ThisTimeLastYearCalculationService {
 		
 		ThisTimeLastYearCalculation<?> thisTimeLastYearCalculation = null;
 		if(calculationType.equalsIgnoreCase("Revenue")) {
-			thisTimeLastYearCalculation = new ThisTimeLastYearCalculation<BigDecimal>(new RevenueCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip);
+			thisTimeLastYearCalculation = new ThisTimeLastYearCalculation<Integer>(new RevenueCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip);
 		}
 		else if(calculationType.equalsIgnoreCase("Margin")) {
-			thisTimeLastYearCalculation = new ThisTimeLastYearCalculation<BigDecimal>(new MarginCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip);
+			thisTimeLastYearCalculation = new ThisTimeLastYearCalculation<Integer>(new MarginCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip);
 		}
 		else if(calculationType.equalsIgnoreCase("Margin %")) {
 			thisTimeLastYearCalculation = new ThisTimeLastYearCalculation<BigDecimal>(new MarginPercentageCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip);
@@ -104,8 +104,8 @@ public class ThisTimeLastYearCalculationService {
 		}
 		
 		List<ThisTimeLastYearCalculation<?>> thisTimeLastYearCalculation = new ArrayList<>();
-		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<BigDecimal>(new RevenueCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
-		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<BigDecimal>(new MarginCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
+		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<Integer>(new RevenueCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
+		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<Integer>(new MarginCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
 		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<BigDecimal>(new MarginPercentageCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
 		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<Integer>(new QuantityCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
 		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<BigDecimal>(new FlatAveragePricePerSkuCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
@@ -139,8 +139,8 @@ public class ThisTimeLastYearCalculationService {
 		}
 		
 		List<ThisTimeLastYearCalculation<?>> thisTimeLastYearCalculation = new ArrayList<>();
-		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<BigDecimal>(new RevenueCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
-		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<BigDecimal>(new MarginCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
+		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<Integer>(new RevenueCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
+		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<Integer>(new MarginCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
 		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<BigDecimal>(new MarginPercentageCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
 		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<Integer>(new QuantityCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));
 		thisTimeLastYearCalculation.add(new ThisTimeLastYearCalculation<BigDecimal>(new FlatAveragePricePerSkuCalculation(), listProductSalesDetails, mapPriceSensitivity, mapProductSip));

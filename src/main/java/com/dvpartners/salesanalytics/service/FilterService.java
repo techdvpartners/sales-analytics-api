@@ -1,5 +1,6 @@
 package com.dvpartners.salesanalytics.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,48 @@ public class FilterService {
 	@Autowired
 	private FilterRepository filterRepository;
 	
+	
+	public List<String> getDistinctSuperCategory(){
+		List<String> superCategory = filterRepository.findDistinctSuperCategory();
+		Collections.sort(superCategory);
+		return superCategory;
+	}
 	public List<String> getDistinctCategory(){
-		return filterRepository.findDistinctCategory();
+		List<String> category = filterRepository.findDistinctCategory();
+		Collections.sort(category);
+		return category;
 	}
 	public List<String> getDistinctGrp(){
-		return filterRepository.findDistinctGrp();
+		List<String> grp = filterRepository.findDistinctGrp();
+		Collections.sort(grp);
+		return grp;
 	}
 	public List<String> getDistinctSubgroup(){
-		return filterRepository.findDistinctSubgroup();
+		List<String> subGroup = filterRepository.findDistinctSubgroup();
+		Collections.sort(subGroup);
+		return subGroup;
+	}
+	public FilterCategoryModel getFilteredSuperCategory(SalesFilter salesFilter){
+		List<String> catList;
+		List<String> grpList;
+		List<String> subgroupList;
+		if(salesFilter.getSuperCategory().size()>0) {
+			catList = filterRepository.findDistinctCatBySuperCategoryIn(salesFilter.getSuperCategory());
+			grpList = filterRepository.findDistinctGrpBySuperCategoryIn(salesFilter.getSuperCategory());
+			subgroupList = filterRepository.findDistinctSubgroupBySuperCategoryIn(salesFilter.getSuperCategory());
+		}else {
+			catList = filterRepository.findDistinctCategory();
+			grpList = filterRepository.findDistinctGrp();
+			subgroupList = filterRepository.findDistinctSubgroup();
+		}
+		
+		Collections.sort(catList);
+		Collections.sort(grpList);
+		Collections.sort(subgroupList);
+		
+		FilterCategoryModel filterCategoryModel = new FilterCategoryModel(catList, grpList, subgroupList);
+		
+		return filterCategoryModel;
 	}
 	public FilterCategoryModel getFilteredCategory(SalesFilter salesFilter){
 		List<String> grpList;
@@ -35,7 +70,10 @@ public class FilterService {
 			subgroupList = filterRepository.findDistinctSubgroup();
 		}
 		
-		FilterCategoryModel filterCategoryModel = new FilterCategoryModel(grpList, subgroupList);
+		Collections.sort(grpList);
+		Collections.sort(subgroupList);
+		
+		FilterCategoryModel filterCategoryModel = new FilterCategoryModel(null, grpList, subgroupList);
 		
 		return filterCategoryModel;
 	}
@@ -47,7 +85,9 @@ public class FilterService {
 			subgroupList = filterRepository.findDistinctSubgroup();
 		}
 		
-		FilterCategoryModel filterCategoryModel = new FilterCategoryModel(null, subgroupList);
+		Collections.sort(subgroupList);
+		
+		FilterCategoryModel filterCategoryModel = new FilterCategoryModel(null, null, subgroupList);
 		return filterCategoryModel;
 	}
 }

@@ -34,14 +34,26 @@ public class RangeFileService {
 		StringBuilder filterParam = new StringBuilder("select * from range_file_data");
 		boolean and = false;
 		
+		List<String> supcat = salesFilter.getSuperCategory();
 		List<String> cat = salesFilter.getCategory();
 		List<String> grp = salesFilter.getGroup();
 		List<String> subgrp = salesFilter.getSubGroup();
 		
-		if(!ObjectUtils.isEmpty(cat) || !ObjectUtils.isEmpty(grp) || !ObjectUtils.isEmpty(subgrp)) {
+		if(!ObjectUtils.isEmpty(supcat) || !ObjectUtils.isEmpty(cat) || !ObjectUtils.isEmpty(grp) || !ObjectUtils.isEmpty(subgrp)) {
 			filterParam = filterParam.append(" WHERE ");
 		}
-			
+		
+			if(!ObjectUtils.isEmpty(supcat)) {
+				if(and) filterParam.append(" AND ");
+				filterParam.append(" super_category IN(");
+				for (String supcategory : supcat) {
+					filterParam.append("'"+supcategory+"'"+',');
+				}
+				//cat.forEach( category -> filterParam.append(category+','));
+				filterParam.deleteCharAt(filterParam.length()-1);
+				filterParam.append(") ");
+				and = true;
+			}
 			if(!ObjectUtils.isEmpty(cat)) {
 				if(and) filterParam.append(" AND ");
 				filterParam.append(" category IN(");

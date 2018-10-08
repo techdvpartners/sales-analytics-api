@@ -9,6 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class FilterCategoryModel {
 
+	private List<String> cat;
 	private List<String> grps;
 	private List<String> subgroups;
 	

@@ -14,7 +14,8 @@ public class WeightedAveragePaidPriceCalculation implements Calculation<BigDecim
 		BigDecimal ukPriceConstant = new BigDecimal(1.2);
 		RevenueCalculation revenueCalculation = new RevenueCalculation();
 		QuantityCalculation quantityCalculation = new QuantityCalculation();
-		return (revenueCalculation.calculate(list).multiply(ukPriceConstant)).divide(new BigDecimal(quantityCalculation.calculate(list)),3,RoundingMode.FLOOR);
+		//Integer result = new BigDecimal(revenueCalculation.calculate(list)).multiply(ukPriceConstant).divide(new BigDecimal(quantityCalculation.calculate(list)),3,RoundingMode.FLOOR).intValue();
+		return (new BigDecimal(revenueCalculation.calculate(list)).multiply(ukPriceConstant)).divide(new BigDecimal(quantityCalculation.calculate(list)),3,RoundingMode.FLOOR);
 	}
 
 	@Override

@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @lombok.NoArgsConstructor
 public class SalesFilter {
 
+	@JsonProperty("supcategories")
+	private List<String> superCategory;
+	
 	@JsonProperty("categories")
 	private List<String> category;
 	
